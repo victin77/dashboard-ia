@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* smooth font rendering */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* Premium background (stars + subtle grain) */
+.bg-stars {
+  position: relative;
+  background:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.55) 0 1px, transparent 2px),
+    radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.35) 0 1px, transparent 2px),
+    radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.28) 0 1px, transparent 2px),
+    radial-gradient(1px 1px at 35% 80%, rgba(255,255,255,0.22) 0 1px, transparent 2px),
+    radial-gradient(1px 1px at 10% 60%, rgba(255,255,255,0.18) 0 1px, transparent 2px),
+    radial-gradient(900px 500px at 50% 0%, rgba(124,58,237,0.12), transparent 60%),
+    radial-gradient(700px 500px at 90% 60%, rgba(6,182,212,0.10), transparent 60%),
+    radial-gradient(700px 500px at 10% 80%, rgba(236,72,153,0.08), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+  background-size: auto;
+  filter: saturate(1.1);
+}
+
+/* subtle noise overlay */
+.bg-stars::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+}
+
+@layer components {
+  .glass-card {
+    @apply rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl;
+  }
+  .sideItem {
+    @apply w-full flex items-center gap-3 px-3 lg:px-4 py-3 rounded-2xl border border-transparent text-white/70 hover:text-white hover:bg-white/5 transition;
+  }
+  .sideItem .sideDot {
+    @apply hidden lg:block w-2 h-2 rounded-full bg-transparent;
+  }
+  .sideItem.active {
+    @apply bg-white/10 text-white border-white/10 shadow-[0_12px_40px_-24px_rgba(124,58,237,0.8)];
+  }
+  .sideItem.active .sideDot {
+    @apply bg-violet-400;
+  }
+}
